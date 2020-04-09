@@ -1,0 +1,40 @@
+-- TG_RELNAME
+/*  
+CREATE OR REPLACE FUNCTION logs_function()
+RETURNS trigger AS $$
+BEGIN
+   
+   IF (TG_OP = 'INSERT') THEN
+      INSERT INTO logs (data, hora, tipo, TABELA) VALUES (current_timestamp, DATE_TRUNC('seconds' ,current_time::time), 'I', TG_RELNAME);
+      RETURN NEW;
+   
+   ELSIF (TG_OP = 'UPDATE') THEN
+      INSERT INTO logs (data, hora, tipo, TABELA) VALUES (current_timestamp, DATE_TRUNC('seconds' ,current_time::time),'U', TG_RELNAME);	
+      RETURN NEW;
+  
+   ELSIF (TG_OP = 'DELETE') THEN
+      INSERT INTO logs (data, hora, tipo, TABELA) VALUES (current_timestamp, DATE_TRUNC('seconds' ,current_time::time) ,'D', TG_RELNAME);
+      RETURN OLD;
+   END IF;
+
+RETURN NULL;
+END;
+$$
+language plpgsql;
+*/
+
+CREATE TRIGGER tr_log
+AFTER INSERT OR UPDATE OR DELETE ON vendas_itens
+FOR EACH ROW
+EXECUTE PROCEDURE logs_function();
+
+CREATE TRIGGER tr_log
+AFTER INSERT OR UPDATE OR DELETE ON vendas
+FOR EACH ROW
+EXECUTE PROCEDURE logs_function();
+
+CREATE TRIGGER tr_log
+AFTER INSERT OR UPDATE OR DELETE ON CLIENTES
+FOR EACH ROW
+EXECUTE PROCEDURE logs_function();
+

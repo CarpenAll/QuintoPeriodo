@@ -1,0 +1,56 @@
+CREATE TABLE public.deposito
+(
+    codigo integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    CONSTRAINT deposito_pkey PRIMARY KEY (codigo)
+)
+
+ALTER TABLE vendas_itens ADD column deposito integer;
+
+ALTER TABLE vendas_itens ADD CONSTRAINT vendas_itens_deposito_fkey FOREIGN KEY (deposito)
+	REFERENCES public.deposito (codigo)
+
+CREATE TABLE public.estoque
+(
+    codigo SERIAL,
+    deposito integer NOT NULL,
+    item integer NOT NULL,
+    saldo double precision NOT NULL,
+    CONSTRAINT estoque_pkey PRIMARY KEY (codigo),
+    CONSTRAINT estoque_deposito_fkey FOREIGN KEY (deposito) REFERENCES public.deposito (codigo),
+    CONSTRAINT estoque_item_fkey FOREIGN KEY (item) REFERENCES public.itens (codigo)
+)
+
+-- TG_RELNAME
+
+CREATE OR REPLACE FUNCTION atualiza_estoque_function()
+RETURNS trigger AS $$
+BEGIN
+   
+   	IF (TG_OP = 'INSERT' /*OR TG_OP = 'UPDATE' TESTE*/) THEN
+    	UPDATE ESTOQUE SET SALDO = (saldo - new.quantidade) WHERE ITEM = NEW.ITEM;
+	  return new;
+	 
+  	ELSIF (TG_OP = 'DELETE') THEN
+		UPDATE ESTOQUE SET SALDO = (saldo + old.quantidade) WHERE ITEM = old.item;
+      return old;
+   	END IF;
+
+RETURN NULL;
+END;
+$$
+language plpgsql;
+
+CREATE TRIGGER tr_atualiza_estoque
+AFTER INSERT OR UPDATE OR DELETE ON vendas_itens
+FOR EACH ROW
+EXECUTE PROCEDURE atualiza_estoque_function();
+
+
+select * from deposito;
+
+select * from estoque;
+
+select * from vendas_itens;
+
+delete from vendas_itens where item = 5;

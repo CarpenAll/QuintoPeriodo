@@ -1,0 +1,177 @@
+header{
+    background: #BBBBBB;
+    padding: 20px 0;
+    text-align: center;
+
+}
+
+nav a{    
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav{
+    position: absolute;
+    top: 140px;
+    right: 0px;
+}
+
+nav li{
+    display: inline-block;
+    padding-right: 10px;
+    /* margin: 0 0 0 15px; */
+}
+
+.caixa{
+    position: relative;
+    width: 1000px;
+    margin: auto;
+}
+
+.produtos{
+    width: 940px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.produtos li{
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    vertical-align: top;
+    margin: 0 1%;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 15px;
+}
+
+.produtos h2{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.produtos-descricao{
+    font-size: 18px;
+}
+
+.produtos-preco{
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+footer{
+    text-align: center;
+    padding: 40px 0;
+}
+
+.copyright{
+    color: peru;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+nav a:hover{
+    color: peru;
+    text-decoration: underline;
+}
+
+.produtos li:hover{
+    border-color: peru;
+}
+
+.produtos li:active{
+    border-color: green;
+}
+
+main{
+    width: 940px;
+    margin: 0 auto;
+}
+
+form{
+    margin: 50px 0;
+    text-align: center;
+
+}
+
+form label, form legend{
+    display: block;
+    font-size: 20px;
+    margin:10px;
+}
+
+.input-padrao{
+    padding: 10px 25px;
+    width: 40%;
+    text-align: center;
+}
+
+.checkbox{
+    margin: 20px 0;
+}
+
+select{
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+.button{
+    display: block;
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+
+.contatos li{
+    padding: 10px;
+    padding-right: 10%;
+    display: list-item;
+    text-align: center;
+    width: 30%;
+    vertical-align: top;
+    margin: auto;
+    margin-top: 20px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;   
+}
+
+.planos{
+    padding: 10px;
+    padding-right: 2%;
+    width: 40%;
+    margin: auto;
+    margin-top: 30px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;   
+}
+
+.planos p{
+    margin: auto;
+    text-align: justify;
+}
+
+.cliente{
+    padding: 10px;
+    
+    width: 29%;
+    margin: auto;
+    margin-top: 30px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;   
+}
+
+.cliente p{
+    margin: auto;
+    text-align: center;
+}
